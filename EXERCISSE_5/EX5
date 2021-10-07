@@ -1,0 +1,160 @@
+anusha@anusha-VirtualBox:~/shell$ vim prog1.sh
+anusha@anusha-VirtualBox:~/shell$ cat prog1.sh
+#! /bin/bash
+echo "Enter File Name"
+read file
+if [ -f $file ]
+then
+echo "File exists and it is an ORDINARY FILE "
+elif [ -d $file ]
+then
+echo "DIRECTORY FILE "
+else
+echo "File does not exist"
+fi
+if [ -c $file ]
+then
+echo "CHARACTER DEVICE FILES"
+fi
+anusha@anusha-VirtualBox:~/shell$ bash prog1.sh
+Enter File Name
+sum.sh
+File exists and it is an ORDINARY FILE
+anusha@anusha-VirtualBox:~/shell$ bash prog1.sh
+Enter File Name
+shell
+DIRECTORY FILE
+anusha@anusha-VirtualBox:~/shell$ vim prog2.sh
+anusha@anusha-VirtualBox:~/shell$ cat prog2.sh
+#! /bin/bash
+echo "Enter Basic Salary "
+read sal
+if [ $sal -lt 1500 ]
+then
+hra=$((sal*10/100))
+da=$((sal*90/100))
+else [ $sal -ge 1500 ]
+hra=$((500))
+da=$((sal*98/100))
+fi
+echo "Total Salary: $((hra+da+sal))"
+anusha@anusha-VirtualBox:~/shell$ bash prog2.sh
+Enter Basic Salary
+1000
+Total Salary: 2000
+anusha@anusha-VirtualBox:~/shell$ bash prog2.sh
+Enter Basic Salary
+2000
+Total Salary: 4460
+anusha@anusha-VirtualBox:~/shell$ cat prog3.sh
+#! /bin/bash
+echo "Enter First Number:"
+read num1
+echo "Enter Second Number:"
+read num2
+echo "Result: "
+result= echo $num1^$num2 | bc
+anusha@anusha-VirtualBox:~/shell$ bash prog3.sh
+Enter First Number:
+2
+Enter Second Number:
+3
+Result:
+8
+
+anusha@anusha-VirtualBox:~/shell$ vim prog4.sh
+anusha@anusha-VirtualBox:~/shell$ cat prog4.sh
+#! /bin/bash
+echo "Enter first file name: "
+read f1
+echo "Enter Second File name: "
+read f2
+if cmp $f1 $f2
+then
+rm -i "$f2"
+else
+echo "Files are not same"
+fi
+anusha@anusha-VirtualBox:~/shell$ bash prog4.sh
+Enter first file name:
+sum.sh
+Enter Second File name:
+s.sh
+sum.sh s.sh differ: byte 13, line 1
+Files are not same
+anusha@anusha-VirtualBox:~/shell$ vim 1.sh
+anusha@anusha-VirtualBox:~/shell$ vim 2.sh
+anusha@anusha-VirtualBox:~/shell$ bash prog4.sh
+Enter first file name:
+1.sh
+Enter Second File name:
+2.sh
+rm: remove regular file '2.sh'? y
+anusha@anusha-VirtualBox:~/shell$ vim prog5.sh
+anusha@anusha-VirtualBox:~/shell$ cat prog5.sh
+echo "Enter two numbers:"
+read a
+read b
+echo "1.Addition"
+echo "2.Subtraction"
+echo "3.Multiplication"
+echo "4.Division"
+echo "Enter choice:"
+read choice
+case $choice in
+1)let sum=$a+$b
+echo "Result: $sum";;
+2)let sub=$a-$b
+echo "Result: $sub";;
+3)let mul=$a*$b
+echo "Result: $mul";;
+4)let div=$a/$b;
+echo "Result: $div";;
+*)echo "Invalid";;
+esac
+anusha@anusha-VirtualBox:~/shell$ bash prog5.sh
+Enter two numbers:
+2
+3
+1.Addition
+2.Subtraction
+3.Multiplication
+4.Division
+Enter choice:
+1
+Result: 5
+anusha@anusha-VirtualBox:~/shell$ bash prog5.sh
+Enter two numbers:
+4
+2
+
+1.Addition
+2.Subtraction
+3.Multiplication
+4.Division
+Enter choice:
+2
+Result: 2
+anusha@anusha-VirtualBox:~/shell$ bash prog5.sh
+Enter two numbers:
+4
+3
+1.Addition
+2.Subtraction
+3.Multiplication
+4.Division
+Enter choice:
+3
+Result: 12
+anusha@anusha-VirtualBox:~/shell$ bash prog5.sh
+Enter two numbers:
+4
+2
+1.Addition
+2.Subtraction
+3.Multiplication
+4.Division
+Enter choice:
+4
+Result: 2
+anusha@anusha-VirtualBox:~/shell$
